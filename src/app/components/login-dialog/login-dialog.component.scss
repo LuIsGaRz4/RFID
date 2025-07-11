@@ -1,0 +1,80 @@
+
+
+h2 {
+  font-weight: 700;
+  color: #34495e;
+  text-align: center;
+  user-select: none;
+  word-break: break-word;
+}
+
+input {
+  width: 85%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1.8px solid #d1d9e6;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  color: #2c3e50;
+  background: #fff;
+
+  &:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.4);
+  }
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  min-height: 1.2em;
+  user-select: none;
+  word-break: break-word;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+
+  button {
+    flex: 1;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+
+  button[color='primary'] {
+    background-color: #3498db;
+    color: white;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+
+    &:hover:not(:disabled) {
+      background-color: #2c80b4;
+      box-shadow: 0 6px 16px rgba(31, 95, 134, 0.6);
+    }
+  }
+
+  button[color='warn'] {
+    background-color: #e74c3c;
+    color: white;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+
+    &:hover {
+      background-color: #c0392b;
+      box-shadow: 0 6px 16px rgba(184, 54, 40, 0.6);
+    }
+  }
+}

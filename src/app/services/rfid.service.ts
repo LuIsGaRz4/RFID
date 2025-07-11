@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders  } from '@angular/common/http';
 import { RFIDRegistro } from '../MODELS/rfid-registro.models';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
 })
 export class RfidService {
   private apiUrl = environment.apiUrl;
+  private baseUrl = 'https://localhost:7188/api/RFIDRegistro';
+
 
   constructor(private http: HttpClient) {}
 
@@ -23,13 +25,16 @@ export class RfidService {
   }
 
   // ✅ Actualizar registro (PUT)
-  putRegistro(data: RFIDRegistro): Observable<RFIDRegistro> {
-    return this.http.put<RFIDRegistro>(this.apiUrl, data);
+  putRegistro(data: RFIDRegistro, idTarjeta: string) {
+    return this.http.put(this.baseUrl, data, {
+      headers: new HttpHeaders({ idTarjeta })
+    });
   }
 
-  // ✅ Eliminar registro (DELETE)
-  deleteRegistro(idRegistro: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${idRegistro}`);
+  deleteRegistro(id: string, idTarjeta: string) {
+    return this.http.delete(`${this.baseUrl}/${id}`, {
+      headers: new HttpHeaders({ idTarjeta })
+    });
   }
 
 getRolPorTarjeta(idTarjeta: string): Observable<string> {

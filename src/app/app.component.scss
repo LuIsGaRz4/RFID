@@ -1,0 +1,421 @@
+/* =======================
+  Variables y estilos base
+======================== */
+:host {
+  --bg-color: #e3f2fd; /* azul muy claro */
+  --text-color: #1b2838; /* azul oscuro */
+  --title-color: #0d47a1; /* azul intenso */
+  --form-bg: #ffffff;
+  --form-shadow: rgba(13, 71, 161, 0.15); /* sombra azul */
+  --input-border: #90caf9; /* azul suave */
+  --input-focus-border: #1976d2; /* azul vivo */
+  --button-primary-bg: #1976d2; /* azul vibrante */
+  --button-primary-hover: #1565c0; /* azul más oscuro */
+  --button-danger-bg: #d32f2f; /* rojo fuerte */
+  --button-danger-hover: #b71c1c; /* rojo oscuro */
+  --table-header-bg: linear-gradient(90deg, #1976d2, #42a5f5);
+  --table-row-hover-bg: #bbdefb; /* azul suave */
+  --table-border: #90caf9;
+  --login-bg: #ffffff;
+  --login-shadow: rgba(25, 118, 210, 0.25);
+
+  display: block;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+/* =======================
+  Títulos centrados y modernos
+======================== */
+h2, h3 {
+  text-align: center;
+  color: var(--title-color);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* =======================
+  Formulario centrado con sombras y bordes
+======================== */
+form {
+  background: var(--form-bg);
+  padding: 1.8rem 2rem;
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px var(--form-shadow);
+  border: 1px solid var(--input-border);
+  transition: box-shadow 0.3s ease;
+}
+
+form:hover {
+  box-shadow: 0 14px 40px rgba(21, 101, 192, 0.3);
+}
+
+/* Label destacado y con espacio */
+form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--title-color);
+}
+
+/* Inputs modernos con borde difuminado y foco */
+form input[type="text"] {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  border: 2px solid var(--input-border);
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  background: #f9fbff;
+  color: var(--text-color);
+}
+
+form input[type="text"]:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 10px rgba(25, 118, 210, 0.6);
+}
+
+/* Botones con estilo moderno, tamaño cómodo y efecto hover */
+form button {
+  padding: 0.65rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2196f3, #42a5f5);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 16px rgba(25, 118, 210, 0.5);
+}
+
+form button:hover {
+  background: linear-gradient(135deg, #1565c0, #1e88e5);
+  box-shadow: 0 8px 22px rgba(21, 101, 192, 0.8);
+}
+
+/* Botón tipo "button" con estilo peligro */
+form button[type="button"] {
+  background: linear-gradient(135deg, #e53935, #d32f2f);
+  box-shadow: 0 6px 16px rgba(211, 47, 47, 0.5);
+  color: white;
+}
+
+form button[type="button"]:hover {
+  background: linear-gradient(135deg, #b71c1c, #c62828);
+  box-shadow: 0 8px 22px rgba(183, 28, 28, 0.8);
+}
+
+/* =======================
+  Tabla estilizada y centrada
+======================== */
+table {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px var(--form-shadow);
+  background: var(--form-bg);
+  font-size: 0.95rem;
+}
+
+/* Encabezado con fondo degradado azul */
+th {
+  background: var(--table-header-bg);
+  color: #fff;
+  font-weight: 700;
+  padding: 1rem 1.2rem;
+  text-align: left;
+  user-select: none;
+}
+
+/* Celdas con padding y borde claro */
+td {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--table-border);
+  color: var(--title-color);
+}
+
+/* Filas con cambio de color suave al pasar el mouse */
+tbody tr:hover {
+  background-color: var(--table-row-hover-bg);
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+/* Botones dentro de la tabla con colores vivos */
+table button {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  color: white;
+}
+
+table button:first-child {
+  background-color: #27ae60;
+  box-shadow: 0 6px 18px rgba(39, 174, 96, 0.5);
+}
+
+table button:first-child:hover {
+  background-color: #1e8449;
+  box-shadow: 0 8px 22px rgba(30, 132, 73, 0.7);
+}
+
+table button:last-child {
+  background: linear-gradient(135deg, #e53935, #d32f2f);
+  box-shadow: 0 6px 16px rgba(211, 47, 47, 0.5);
+}
+
+table button:last-child:hover {
+  background: linear-gradient(135deg, #b71c1c, #c62828);
+  box-shadow: 0 8px 22px rgba(183, 28, 28, 0.8);
+}
+
+/* =======================
+  Login fijo en la esquina
+======================== */
+.login-corner {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+  background: var(--login-bg);
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px var(--login-shadow);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: var(--title-color);
+  user-select: none;
+}
+
+/* Botón login dentro del corner */
+.login-corner button {
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-corner button[color="primary"] {
+  background: linear-gradient(135deg, #2196f3, #42a5f5);
+  color: white;
+  box-shadow: 0 6px 16px rgba(25, 118, 210, 0.5);
+}
+
+.login-corner button[color="primary"]:hover {
+  background: linear-gradient(135deg, #1565c0, #1e88e5);
+  box-shadow: 0 8px 22px rgba(21, 101, 192, 0.8);
+}
+
+.login-corner button[color="warn"] {
+  background: linear-gradient(135deg, #e53935, #d32f2f);
+  color: white;
+  box-shadow: 0 6px 16px rgba(211, 47, 47, 0.5);
+}
+
+.login-corner button[color="warn"]:hover {
+  background: linear-gradient(135deg, #b71c1c, #c62828);
+  box-shadow: 0 8px 22px rgba(183, 28, 28, 0.8);
+}
+
+/* =======================
+  Botón toggle modo fijo
+======================== */
+.theme-toggle-btn {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  background: linear-gradient(135deg, #2196f3, #42a5f5);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 6px 18px rgba(25, 118, 210, 0.6);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10000;
+}
+
+.theme-toggle-btn:hover {
+  background: linear-gradient(135deg, #1565c0, #1e88e5);
+  box-shadow: 0 8px 22px rgba(21, 101, 192, 0.8);
+}
+
+/* =======================
+  Tema oscuro (clase dark-theme)
+======================== */
+:host(.dark-theme) {
+  --bg-color: #0b1220; /* casi negro con azul oscuro */
+  --text-color: #e3eaf2; /* blanco azulado */
+  --title-color: #82b1ff; /* azul neón claro */
+  --form-bg: #121a33; /* azul muy oscuro */
+  --form-shadow: rgba(130, 177, 255, 0.3); /* sombra azul neón */
+  --input-border: #536dfe; /* azul eléctrico */
+  --input-focus-border: #448aff; /* azul neón más brillante */
+  --button-primary-bg: #2979ff; /* azul neón */
+  --button-primary-hover: #2962ff; /* azul neón intenso */
+  --button-danger-bg: #ff5252; /* rojo neón */
+  --button-danger-hover: #ff1744; /* rojo neón intenso */
+  --table-header-bg: linear-gradient(90deg, #283593, #3949ab);
+  --table-row-hover-bg: #1a237e;
+  --table-border: #536dfe;
+  --login-bg: #121a33;
+  --login-shadow: rgba(130, 177, 255, 0.4);
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* =======================
+  Ajustes en modo oscuro para elementos
+======================== */
+:host(.dark-theme) form {
+  box-shadow: 0 10px 35px var(--form-shadow);
+  border: 1px solid var(--input-border);
+  background: var(--form-bg);
+  color: var(--text-color);
+}
+
+:host(.dark-theme) form:hover {
+  box-shadow: 0 14px 45px rgba(41, 121, 255, 0.5);
+}
+
+:host(.dark-theme) form input[type="text"] {
+  border: 2px solid var(--input-border);
+  background: #0f1742;
+  color: var(--text-color);
+}
+
+:host(.dark-theme) form input[type="text"]:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 12px rgba(68, 138, 255, 0.8);
+}
+
+:host(.dark-theme) form button {
+  background: linear-gradient(135deg, #2979ff, #448aff);
+  color: var(--text-color);
+  box-shadow: 0 7px 20px rgba(41, 121, 255, 0.7);
+}
+
+:host(.dark-theme) form button:hover {
+  background: linear-gradient(135deg, #2962ff, #2979ff);
+  box-shadow: 0 10px 26px rgba(41, 121, 255, 1);
+}
+
+:host(.dark-theme) form button[type="button"] {
+  background: linear-gradient(135deg, #ff5252, #ff1744);
+  box-shadow: 0 7px 20px rgba(255, 82, 82, 0.7);
+  color: #fff;
+}
+
+:host(.dark-theme) form button[type="button"]:hover {
+  background: linear-gradient(135deg, #ff1744, #d50000);
+  box-shadow: 0 10px 26px rgba(255, 23, 68, 1);
+}
+
+:host(.dark-theme) table {
+  background: var(--form-bg);
+  box-shadow: 0 8px 25px var(--form-shadow);
+  color: var(--text-color);
+  border-radius: 12px;
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+:host(.dark-theme) th {
+  background: var(--table-header-bg);
+  color: #cfd8dc;
+}
+
+:host(.dark-theme) td {
+  border-bottom: 1px solid var(--table-border);
+  color: var(--title-color);
+}
+
+:host(.dark-theme) tbody tr:hover {
+  background-color: var(--table-row-hover-bg);
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+:host(.dark-theme) table button:first-child {
+  background-color: #4caf50;
+  box-shadow: 0 6px 18px rgba(76, 175, 80, 0.7);
+}
+
+:host(.dark-theme) table button:first-child:hover {
+  background-color: #388e3c;
+  box-shadow: 0 8px 22px rgba(56, 142, 60, 1);
+}
+
+:host(.dark-theme) table button:last-child {
+  background: linear-gradient(135deg, #ff5252, #ff1744);
+  box-shadow: 0 6px 16px rgba(255, 82, 82, 0.7);
+}
+
+:host(.dark-theme) table button:last-child:hover {
+  background: linear-gradient(135deg, #ff1744, #d50000);
+  box-shadow: 0 8px 22px rgba(255, 23, 68, 1);
+}
+
+:host(.dark-theme) .login-corner {
+  background: var(--login-bg);
+  box-shadow: 0 10px 35px var(--login-shadow);
+  color: var(--title-color);
+}
+
+:host(.dark-theme) .login-corner button[color="primary"] {
+  background: linear-gradient(135deg, #2979ff, #448aff);
+  box-shadow: 0 8px 22px rgba(41, 121, 255, 1);
+  color: var(--text-color);
+}
+
+:host(.dark-theme) .login-corner button[color="primary"]:hover {
+  background: linear-gradient(135deg, #2962ff, #2979ff);
+  box-shadow: 0 10px 26px rgba(41, 121, 255, 1);
+}
+
+:host(.dark-theme) .login-corner button[color="warn"] {
+  background: linear-gradient(135deg, #ff5252, #ff1744);
+  box-shadow: 0 8px 22px rgba(255, 82, 82, 1);
+  color: #fff;
+}
+
+:host(.dark-theme) .login-corner button[color="warn"]:hover {
+  background: linear-gradient(135deg, #ff1744, #d50000);
+  box-shadow: 0 10px 26px rgba(255, 23, 68, 1);
+}
+
+:host(.dark-theme) .theme-toggle-btn {
+  box-shadow: 0 6px 20px rgba(41, 121, 255, 0.9);
+  background: linear-gradient(135deg, #2979ff, #448aff);
+  color: #e3eaf2;
+}
+
+:host(.dark-theme) .theme-toggle-btn:hover {
+  box-shadow: 0 8px 28px rgba(41, 121, 255, 1);
+  background: linear-gradient(135deg, #2962ff, #2979ff);
+}

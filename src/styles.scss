@@ -1,58 +1,271 @@
-/* You can add global styles to this file, and also import other style files */
+:host {
+  --bg-color: #f0f4f8;
+  --text-color: #2c3e50;
+  --title-color: #34495e;
+  --form-bg: #ffffff;
+  --form-shadow: rgba(0, 0, 0, 0.08);
+  --input-border: #d1d9e6;
+  --input-focus-border: #3498db;
+  --button-primary-bg: #3498db;
+  --button-primary-hover: #2c80b4;
+  --button-danger-bg: #e74c3c;
+  --button-danger-hover: #c0392b;
+  --table-header-bg: linear-gradient(90deg, #2980b9, #3498db);
+  --table-row-hover-bg: #e8f0fc;
+  --table-border: #e1e8f0;
+  --login-bg: #ffffff;
+  --login-shadow: rgba(0, 0, 0, 0.12);
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-.snackbar-success {
-  background-color: #4caf50; /* verde */
-  color: white;
+  display: block;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
 }
 
-.snackbar-error {
-  background-color: #f44336; /* rojo */
-  color: white;
-}
-/* En styles.css o styles.scss global de tu proyecto */
-
-.mat-snack-bar-container {
-  top: 20px !important;
-  right: 20px !important;
-  bottom: auto !important;
-  left: auto !important;
-  position: fixed !important;
-  margin: 0 !important;
-  border-radius: 4px;
-  z-index: 10000; /* que esté encima de todo */
-}
-// Asegura que el diálogo se muestre por encima
-::ng-deep .cdk-overlay-container {
-  position: fixed !important;
-  z-index: 1000 !important;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+/* Títulos centrados con un toque moderno */
+h2, h3 {
+  text-align: center;
+  color: var(--title-color);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
 }
 
-::ng-deep .cdk-overlay-pane {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  pointer-events: auto;
-}
-
-::ng-deep .mat-dialog-container {
-  border-radius: 10px;
-  background: white;
-  padding: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-}
-
-
-.custom-confirm-dialog .mat-dialog-container {
-  padding: 0;
+/* Formulario centrado y con sombra más suave */
+form {
+  background: var(--form-bg);
+  padding: 1.8rem 2rem;
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
   border-radius: 12px;
-  background: white;
+  box-shadow: 0 8px 20px var(--form-shadow);
+  transition: box-shadow 0.3s ease;
 }
+
+form:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Label destacado y con espacio */
+form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--title-color);
+}
+
+/* Inputs modernos con borde difuminado y foco */
+form input[type="text"] {
+  width: 93%;
+  padding: 0.65rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  border: 1.8px solid var(--input-border);
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  background: var(--form-bg);
+  color: var(--text-color);
+}
+
+form input[type="text"]:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.4);
+}
+
+/* Botones con estilo moderno, tamaño cómodo y efecto hover */
+form button {
+  padding: 0.65rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--button-primary-bg);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+form button:hover {
+  background-color: var(--button-primary-hover);
+  box-shadow: 0 6px 16px rgba(44, 128, 180, 0.5);
+}
+
+form button[type="button"] {
+  background-color: var(--button-danger-bg);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+form button[type="button"]:hover {
+  background-color: var(--button-danger-hover);
+  box-shadow: 0 6px 16px rgba(192, 57, 43, 0.5);
+}
+
+/* Tabla estilizada, centrada, con sombra y cantos redondeados */
+table {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px var(--form-shadow);
+  background: var(--form-bg);
+  font-size: 0.95rem;
+}
+
+/* Encabezado con fondo degradado azul */
+th {
+  background: var(--table-header-bg);
+  color: #fff;
+  font-weight: 700;
+  padding: 1rem 1.2rem;
+  text-align: left;
+  user-select: none;
+}
+
+/* Celdas con padding y borde claro */
+td {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--table-border);
+  color: var(--title-color);
+}
+
+/* Filas con cambio de color suave al pasar el mouse */
+tbody tr:hover {
+  background-color: var(--table-row-hover-bg);
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+/* Botones dentro de la tabla con colores vivos */
+table button {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  color: white;
+}
+
+table button:first-child {
+  background-color: #27ae60;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+table button:first-child:hover {
+  background-color: #1e8449;
+  box-shadow: 0 6px 16px rgba(30, 132, 73, 0.5);
+}
+
+table button:last-child {
+  background-color: var(--button-danger-bg);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+table button:last-child:hover {
+  background-color: var(--button-danger-hover);
+  box-shadow: 0 6px 16px rgba(192, 57, 43, 0.5);
+}
+
+/* Login fijo en la esquina con mejor espaciado y sombra */
+.login-corner {
+  background: transparent !important;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  background: var(--login-bg);
+  padding: 8px 6px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center !important;
+  gap: 12px;
+  font-weight: 600;
+  user-select: none;
+}
+
+/* Botón login dentro del corner */
+.login-corner button {
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.login-corner button[color="primary"] {
+  background-color: var(--button-primary-bg);
+  color: white;
+  box-shadow: 0 4px 12px rgba(41, 128, 185, 0.3);
+}
+
+.login-corner button[color="primary"]:hover {
+  background-color: var(--button-primary-hover);
+  box-shadow: 0 6px 16px rgba(31, 95, 134, 0.5);
+}
+
+.login-corner button[color="warn"] {
+  background-color: var(--button-danger-bg);
+  color: white;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.login-corner button[color="warn"]:hover {
+  background-color: var(--button-danger-hover);
+  box-shadow: 0 6px 16px rgba(184, 54, 40, 0.5);
+}
+
+/* Botón toggle modo fijo */
+.theme-toggle-btn {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  background-color: var(--button-primary-bg);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(41, 128, 185, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10000;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--button-primary-hover);
+  box-shadow: 0 6px 16px rgba(31, 95, 134, 0.6);
+}
+
+/* =======================
+  Tema oscuro (clase dark-theme)
+======================== */
+:host(.dark-theme) {
+  --bg-color: #121417;
+  --text-color: #e1e3e6;
+  --title-color: #f5f7fa;
+  --form-bg: #1f2227;
+  --form-shadow: rgba(255, 255, 255, 0.1);
+  --input-border: #444c56;
+  --input-focus-border: #58a6ff;
+  --button-primary-bg: #2383ff;
+  --button-primary-hover: #1864d9;
+  --button-danger-bg: #ff5c57;
+  --button-danger-hover: #d94045;
+  --table-header-bg: linear-gradient(90deg, #0d47a1, #1565c0);
+  --table-row-hover-bg: #2a2f38;
+  --table-border: #444c56;
+  --login-bg: #1f2227;
+  --login-shadow: rgba(255, 255, 255, 0.1);
+}
+
+

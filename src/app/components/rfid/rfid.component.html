@@ -1,4 +1,34 @@
-<h2>Registro RFID</h2>
+<!-- Botón login fijo en la esquina -->
+<div class="login-corner" style="display: flex; flex-direction: column; align-items: flex-end;">
+  
+  <!-- Contenedor con info y logout (solo al estar logueado) -->
+  <ng-container *ngIf="auth.getRol(); else loginBtn">
+    <div style="margin-bottom: 5px;">
+      👤 {{ auth.getNombre() }} ({{ auth.getRol() }})
+
+    </div>
+  </ng-container>
+
+  <!-- Contenedor separado solo para el botón Exportar -->
+  <ng-container *ngIf="auth.getRol()">
+          <button mat-button color="warn" (click)="logout()">Cerrar sesión</button>
+    <button class="export-btn excel" (click)="exportarExcel()" >
+      📄 Exportar Excel
+    </button>
+      <button class="export-btn pdf" (click)="exportarPDF()" >
+        🧾 Exportar PDF
+      </button>
+  </ng-container>
+
+  <!-- Si no está logueado, mostrar botón login -->
+  <ng-template #loginBtn>
+    <button mat-stroked-button color="primary" (click)="abrirLogin()">Login 🔐</button>
+  </ng-template>
+</div>
+
+
+
+<h2>Escaneo RFID</h2>
 
 <form (ngSubmit)="enviarRegistro()" #rfidForm="ngForm" style="margin-bottom: 20px;">
   <label>Escanea tu tarjeta para registrar acceso:</label><br />
@@ -21,7 +51,7 @@
       <th>Acceso</th>
       <th>Nombre</th>
       <th>Fecha</th>
-      <th>Acciones</th>
+      <th *ngIf="isSupervisor()">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -30,10 +60,12 @@
       <td>{{ reg.idAccesos ? 'Sí' : 'No' }}</td>
       <td>{{ reg.nombre }}</td>
       <td>{{ reg.fecha | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
-      <td>
-        <button (click)="editarRegistro(reg)">Editar</button>
-        <button (click)="eliminarRegistro(reg.idRegistro)">Eliminar</button>
-      </td>
+<!-- Solo mostrar si es supervisor -->
+<td *ngIf="isSupervisor()">
+  <button (click)="editarRegistro(reg)">Editar</button>
+  <button (click)="eliminarRegistro(reg.idRegistro)">Eliminar</button>
+</td>
+
     </tr>
   </tbody>
 </table>

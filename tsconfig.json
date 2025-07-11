@@ -1,4 +1,3 @@
-
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -19,7 +18,8 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "types" : ["node"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

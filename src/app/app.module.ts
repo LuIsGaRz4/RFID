@@ -10,9 +10,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, RfidComponent, ConfirmDialogComponent, EditDialogComponent],
+  declarations: [AppComponent, RfidComponent, ConfirmDialogComponent, EditDialogComponent, LoginDialogComponent],
   imports: [FormsModule,BrowserAnimationsModule,BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule,MatSnackBarModule,MatDialogModule],
   entryComponents: [ConfirmDialogComponent],
   providers: [],

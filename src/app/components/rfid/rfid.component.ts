@@ -4,6 +4,13 @@ import { RFIDRegistro } from 'src/app/MODELS/rfid-registro.models';
 import { NotificationService } from 'src/app/services/notification.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from 'src/app/components/edit-dialog/edit-dialog.component';
+import { AuthService } from '../auth/auth.service';
+import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
 
 
 @Component({
@@ -22,13 +29,66 @@ export class RfidComponent implements OnInit {
 
   editando: boolean = false;
 
-  constructor(private rfidService: RfidService,
-  private notify: NotificationService,
-  private dialog: MatDialog) {}
+  constructor(
+    private rfidService: RfidService,
+    private notify: NotificationService,
+    private dialog: MatDialog,
+    public auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.cargarRegistros();
   }
+
+exportarExcel() {
+  const data = this.registros.map(reg => ({
+    'ID Registro': reg.idRegistro,
+    'Acceso': reg.idAccesos ? 'Sí' : 'No',
+    'Nombre': reg.nombre,
+    'Fecha': reg.fecha ? new Date(reg.fecha).toLocaleString() : '',
+  }));
+
+  const worksheet = XLSX.utils.json_to_sheet(data);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Reporte');
+
+  const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  FileSaver.saveAs(blob, 'Reporte_Accesos.xlsx');
+}
+
+exportarPDF() {
+  const doc = new jsPDF();
+
+  doc.setFontSize(16);
+  doc.text('Reporte de Accesos RFID', 14, 20);
+
+  const tableData = this.registros.map((reg) => [
+    reg.idRegistro ?? '',
+    reg.idAccesos ? 'Sí' : 'No',
+    reg.nombre ?? '',
+    reg.fecha ? new Date(reg.fecha).toLocaleString() : '',
+  ]);
+
+  autoTable(doc, {
+    startY: 30,
+    head: [['ID Registro', 'Acceso', 'Nombre', 'Fecha']],
+    body: tableData as string[][], // forzamos el tipo para evitar conflicto con undefined
+  });
+
+  doc.save('Reporte_Accesos.pdf');
+}
+
+  abrirLogin() {
+  this.dialog.open(LoginDialogComponent, {
+    width: '300px',
+    disableClose: true,
+  });
+}
+
+logout() {
+  this.auth.logout();
+}
 
   cargarRegistros() {
     this.rfidService.getRegistros().subscribe((data) => {
@@ -57,36 +117,73 @@ export class RfidComponent implements OnInit {
     }
   }
 
-  enviarRegistro() {
-    const registroFormateado: RFIDRegistro = {
-      ...this.nuevoRegistro,
-      fecha: this.formatDate(this.nuevoRegistro.fecha || ''),
-    };
+enviarRegistro() {
+  const registroFormateado: RFIDRegistro = {
+    ...this.nuevoRegistro,
+    fecha: this.formatDate(this.nuevoRegistro.fecha || ''),
+  };
 
-    if (this.editando) {
-      this.rfidService.putRegistro(registroFormateado).subscribe(() => {
+  const idTarjeta = this.auth.getIdTarjeta();
+  if (!idTarjeta) {
+    this.notify.showError('⚠️ No se detectó la tarjeta del usuario.');
+    return;
+  }
+
+  if (this.editando) {
+    this.rfidService.putRegistro(registroFormateado, idTarjeta).subscribe(() => {
+      this.notify.showSuccess('Registro actualizado');
+      this.limpiarFormulario();
+      this.cargarRegistros();
+    });
+  } else {
+    this.rfidService.postRegistro(registroFormateado).subscribe(() => {
+      this.notify.showSuccess('Registro guardado');
+      this.limpiarFormulario();
+      this.cargarRegistros();
+    });
+  }
+}
+
+
+async eliminarRegistro(idRegistro: string) {
+  const confirmado = await this.notify.confirm('¿Seguro que quieres eliminar este registro?');
+  if (confirmado) {
+    const idTarjeta = this.auth.getIdTarjeta();
+    if (!idTarjeta) {
+      this.notify.showError('⚠️ No se detectó la tarjeta del usuario.');
+      return;
+    }
+
+    this.rfidService.deleteRegistro(idRegistro, idTarjeta).subscribe(() => {
+      this.notify.showSuccess('Registro eliminado');
+      this.cargarRegistros();
+    });
+  }
+}
+
+
+editarRegistro(registro: RFIDRegistro) {
+  const dialogRef = this.dialog.open(EditDialogComponent, {
+    width: '400px',
+    data: registro,
+    disableClose: true
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      const idTarjeta = this.auth.getIdTarjeta();
+      if (!idTarjeta) {
+        this.notify.showError('⚠️ No se detectó la tarjeta del usuario.');
+        return;
+      }
+
+      this.rfidService.putRegistro(result, idTarjeta).subscribe(() => {
         this.notify.showSuccess('Registro actualizado');
-        this.limpiarFormulario();
-        this.cargarRegistros();
-      });
-    } else {
-      this.rfidService.postRegistro(registroFormateado).subscribe(() => {
-        this.notify.showSuccess('Registro guardado');
-        this.limpiarFormulario();
         this.cargarRegistros();
       });
     }
-  }
-
-  async eliminarRegistro(idRegistro: string) {
-    const confirmado = await this.notify.confirm('¿Seguro que quieres eliminar este registro?');
-    if (confirmado) {
-      this.rfidService.deleteRegistro(idRegistro).subscribe(() => {
-        this.notify.showSuccess('Registro eliminado');
-        this.cargarRegistros();
-      });
-    }
-  }
+  });
+}
 
 
   limpiarFormulario() {
@@ -98,27 +195,14 @@ export class RfidComponent implements OnInit {
     };
     this.editando = false;
   }
-editarRegistro(registro: RFIDRegistro) {
-  const dialogRef = this.dialog.open(EditDialogComponent, {
-    width: '400px',
-    data: registro,
-    disableClose: true
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      this.rfidService.putRegistro(result).subscribe(() => {
-        this.notify.showSuccess('Registro actualizado');
-        this.cargarRegistros();
-      });
-    }
-  });
-}
-
 
   formatDate(date?: string): string {
     if (!date) return '';
     const parsedDate = new Date(date);
     return isNaN(parsedDate.getTime()) ? '' : parsedDate.toISOString();
+  }
+
+  isSupervisor(): boolean {
+    return this.auth.isSupervisor();
   }
 }
