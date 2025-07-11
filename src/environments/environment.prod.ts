@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://mi-servidor.com/api/RFIDRegistro'
 };

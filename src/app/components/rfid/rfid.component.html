@@ -1,0 +1,39 @@
+<h2>Registro RFID</h2>
+
+<form (ngSubmit)="enviarRegistro()" #rfidForm="ngForm" style="margin-bottom: 20px;">
+  <label>Escanea tu tarjeta para registrar acceso:</label><br />
+  <input
+    type="text"
+    [(ngModel)]="nuevoRegistro.idRegistro"
+    name="idRegistro"
+    (input)="onRFIDScanned()"
+    autofocus
+    required
+    placeholder="ID tarjeta RFID"
+  /><br />
+</form>
+
+<h3>Registros RFID</h3>
+<table border="1" cellspacing="0" cellpadding="5" style="width: 100%; margin-top: 20px;">
+  <thead>
+    <tr>
+      <th>Id Registro</th>
+      <th>Acceso</th>
+      <th>Nombre</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let reg of registros">
+      <td>{{ reg.idRegistro }}</td>
+      <td>{{ reg.idAccesos ? 'Sí' : 'No' }}</td>
+      <td>{{ reg.nombre }}</td>
+      <td>{{ reg.fecha | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td>
+        <button (click)="editarRegistro(reg)">Editar</button>
+        <button (click)="eliminarRegistro(reg.idRegistro)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
