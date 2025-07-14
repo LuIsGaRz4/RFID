@@ -120,3 +120,18 @@
 }
 
 
+/* Cuando no es supervisor, alinea todo al centro */
+.login-corner.align-center {
+  align-items: center;
+}
+
+.acciones.justify-center {
+  justify-content: center;
+  gap: 12px; /* si quieres un poco más de espacio entre botones */
+}
+
+/* Opcional: ajusta ancho para que no ocupe todo */
+.encabezado-fijo.no-supervisor {
+  justify-content: center; /* Centra todo el header */
+  padding: 1rem 1rem; /* menos padding si quieres */
+}

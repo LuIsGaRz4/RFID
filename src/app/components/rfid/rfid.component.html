@@ -1,18 +1,25 @@
 <!-- Encabezado fijo -->
-<header class="encabezado-fijo">
-  <div class="login-corner">
+<header class="encabezado-fijo" [class.no-supervisor]="!esSupervisor">
+  <div class="login-corner" [class.align-center]="!esSupervisor">
     <ng-container *ngIf="auth.getRol(); else loginBtn">
       <div class="user-info">
         👤 {{ auth.getNombre() }} ({{ auth.getRol() }})
       </div>
 
-      <div class="acciones">
-        <button class="export-btn user" (click)="abrirModal()">👤 Usuarios</button>
-        <button class="export-btn add" (click)="abrirFormularioManual()">➕ Agregar Tarjetas</button>
-        <button class="export-btn delete" (click)="abrirFormularioeliminart()">✖️ Eliminar Tarjetas</button>
-        <button class="export-btn excel" (click)="exportarExcel()">📄 Exportar Excel</button>
-        <button class="export-btn pdf" (click)="exportarPDF()">🧾 Exportar PDF</button>
-        <button class="export-btn logout" (click)="logout()">🔒 Cerrar sesión</button>
+      <div class="acciones" [class.justify-center]="!esSupervisor">
+        <!-- Botones visibles solo para Supervisor -->
+        <ng-container *ngIf="esSupervisor">
+          <button class="export-btn user" (click)="abrirModal()">👤 Usuarios</button>
+          <button class="export-btn add" (click)="abrirFormularioManual()">➕ Agregar Tarjetas</button>
+          <button class="export-btn delete" (click)="abrirFormularioeliminart()">✖️ Eliminar Tarjetas</button>
+        </ng-container>
+
+        <!-- Botones disponibles para todos los roles -->
+        <ng-container *ngIf="auth.getRol()">
+          <button class="export-btn excel" (click)="exportarExcel()">📄 Exportar Excel</button>
+          <button class="export-btn pdf" (click)="exportarPDF()">🧾 Exportar PDF</button>
+          <button class="export-btn logout" (click)="logout()">🔒 Cerrar sesión</button>
+        </ng-container>
       </div>
     </ng-container>
 
@@ -21,6 +28,7 @@
     </ng-template>
   </div>
 </header>
+
 
 <!-- Espacio para evitar que el header tape el contenido -->
 <div style="height: 80px;"></div>

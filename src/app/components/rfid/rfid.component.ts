@@ -92,6 +92,10 @@ exportarPDF() {
 logout() {
   this.auth.logout();
 }
+get esSupervisor(): boolean {
+  return this.auth.isSupervisor();
+}
+
 
   cargarRegistros() {
     this.rfidService.getRegistros().subscribe((data) => {
