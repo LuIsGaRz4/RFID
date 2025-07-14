@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private baseUrl = 'https://localhost:7188/api/RFIDRegistro'; // o la ruta correspondiente
+  private baseUrl = 'https://localhost:7188/api/RFIDRegistro'; // ruta API
 
   constructor(private http: HttpClient) {}
 
@@ -28,9 +28,41 @@ export class AuthService {
   isSupervisor(): boolean {
     return this.getRol() === 'Supervisor';
   }
+
   getNombre(): string | null {
-    const session = localStorage.getItem('session');
-    return session ? JSON.parse(session).nombre : null;
+    return localStorage.getItem('nombre');
+  }
+
+  eliminarTarjeta(idTarjetaEliminar: string) {
+    const idTarjetaSolicitante = this.getIdTarjeta();
+    if (!idTarjetaSolicitante) {
+      throw new Error('No se detectó la tarjeta del usuario');
+    }
+
+    const headers = new HttpHeaders({
+      idTarjeta: idTarjetaSolicitante
+    });
+
+    return this.http.delete(
+      `${this.baseUrl}/BorrarTarjeta/${idTarjetaEliminar}`,
+      { headers }
+    );
+  }
+
+  eliminarRegistro(idRegistro: string) {
+    const idTarjetaSolicitante = this.getIdTarjeta();
+    if (!idTarjetaSolicitante) {
+      throw new Error('No se detectó la tarjeta del usuario');
+    }
+
+    const headers = new HttpHeaders({
+      idTarjeta: idTarjetaSolicitante
+    });
+
+    return this.http.delete(
+      `${this.baseUrl}/BorrarRegistro/${idRegistro}`,
+      { headers }
+    );
   }
 
   logout() {

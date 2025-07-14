@@ -11,9 +11,14 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { RfidManualComponent } from './components/rfid-manual/rfid-manual.component';
+import { RfidEliminarTarjetaComponent } from './components/rfid-eliminar-tarjeta/rfid-eliminar-tarjeta.component';
+import { RfidUsuariosComponent } from './components/rfid-usuarios/rfid-usuarios.component';
+import { UsuarioModalComponent } from './components/rfid-usuarios/usuario-modal/usuario-modal.component';
+import { UsuariosListaComponent } from './components/rfid-usuarios/usuario-lista/usuario-lista.component';
 
 @NgModule({
-  declarations: [AppComponent, RfidComponent, ConfirmDialogComponent, EditDialogComponent, LoginDialogComponent],
+  declarations: [AppComponent, RfidComponent, ConfirmDialogComponent, EditDialogComponent, LoginDialogComponent, RfidManualComponent, RfidEliminarTarjetaComponent, RfidUsuariosComponent, UsuarioModalComponent,UsuariosListaComponent],
   imports: [FormsModule,BrowserAnimationsModule,BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule,MatSnackBarModule,MatDialogModule],
   entryComponents: [ConfirmDialogComponent],
   providers: [],

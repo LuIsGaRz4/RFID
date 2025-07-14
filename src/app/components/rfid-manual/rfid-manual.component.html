@@ -1,0 +1,20 @@
+<div class="tarjeta-manual">
+  <h2>➕ Agregar Tarjeta</h2>
+
+  <form (ngSubmit)="guardarTarjetaManual()">
+    <div class="form-group">
+      <label for="idTarjeta">ID de Tarjeta</label>
+      <input type="text" id="idTarjeta" name="idTarjeta" [(ngModel)]="nuevaTarjeta.idTarjeta" required />
+    </div>
+
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" name="nombre" [(ngModel)]="nuevaTarjeta.nombre" required />
+    </div>
+
+    <div class="button-group">
+      <button type="submit" class="btn guardar">💾 Guardar</button>
+      <button type="button" class="btn cancelar" (click)="cerrar()">❌ Cancelar</button>
+    </div>
+  </form>
+</div>

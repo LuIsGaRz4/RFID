@@ -12,9 +12,39 @@
   user-select: none;
 }
 
-/* Excel - Verde */
+/* 👤 Usuarios - Morado */
+.export-btn.user {
+  background-color: #7b1fa2;
+}
+
+.export-btn.user:hover {
+  background-color: #6a1b9a;
+  box-shadow: 0 4px 8px rgba(123, 31, 162, 0.4);
+}
+
+/* ➕ Agregar - Naranja */
+.export-btn.add {
+  background-color: #ef6c00;
+}
+
+.export-btn.add:hover {
+  background-color: #e65100;
+  box-shadow: 0 4px 8px rgba(230, 81, 0, 0.5);
+}
+
+/* ✖️ Eliminar - Rojo */
+.export-btn.delete {
+  background-color: #37474f;
+}
+
+.export-btn.delete:hover {
+  background-color: #263238;
+  box-shadow: 0 4px 8px rgba(38, 50, 56, 0.5);
+}
+
+/* 📄 Excel - Verde */
 .export-btn.excel {
-  background-color: #2e7d32; /* verde */
+  background-color: #2e7d32;
 }
 
 .export-btn.excel:hover {
@@ -22,12 +52,71 @@
   box-shadow: 0 4px 8px rgba(27, 94, 32, 0.5);
 }
 
-/* PDF - Azul */
+/* 🧾 PDF - Azul */
 .export-btn.pdf {
-  background-color: #1565c0; /* azul */
+  background-color: #1565c0;
 }
 
 .export-btn.pdf:hover {
   background-color: #0d47a1;
   box-shadow: 0 4px 8px rgba(13, 71, 161, 0.5);
 }
+
+/* 🔒 Cerrar sesión - Gris oscuro */
+.export-btn.logout {
+  background-color: #d32f2f;
+}
+
+.export-btn.logout:hover {
+  background-color: #b71c1c;
+  box-shadow: 0 4px 8px rgba(183, 28, 28, 0.5);
+
+}
+
+
+.encabezado-fijo {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background: #fff;
+  padding: 1rem 1.5rem;
+  z-index: 999;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login-corner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-info {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #333;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.export-btn {
+  cursor: pointer;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  color: white;
+  user-select: none;
+}
+
+

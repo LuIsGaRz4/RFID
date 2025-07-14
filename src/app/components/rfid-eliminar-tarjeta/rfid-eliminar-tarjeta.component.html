@@ -1,0 +1,30 @@
+<div class="overlay">
+  <h2>Eliminar Tarjetas</h2>
+
+  <div *ngIf="cargando">Cargando tarjetas...</div>
+
+  <table *ngIf="!cargando && tarjetas.length > 0" class="tarjetas-table">
+    <thead>
+      <tr>
+        <th>ID Tarjeta</th>
+        <th>Nombre</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tarjeta of tarjetas">
+        <td>{{ tarjeta.idTarjeta }}</td>
+        <td>{{ tarjeta.nombre }}</td>
+        <td>
+          <button (click)="eliminarTarjeta(tarjeta.idTarjeta)" class="delete-btn">✖️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!cargando && tarjetas.length === 0">
+    No hay tarjetas registradas.
+  </div>
+
+  <button (click)="cerrar()">Cerrar</button>
+</div>

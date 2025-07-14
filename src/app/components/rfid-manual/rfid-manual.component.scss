@@ -1,0 +1,80 @@
+.tarjeta-manual {
+  max-width: 400px;
+  margin: 2rem auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color, #333);
+}
+
+.tarjeta-manual h2 {
+  text-align: center;
+  margin: 0 0 1.5rem;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--title-color, #2c3e50);
+}
+
+.tarjeta-manual form {
+  background: var(--form-bg, #fff);
+  padding: 20px 24px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  max-width: 100%;
+}
+
+.tarjeta-manual form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tarjeta-manual form label {
+  font-weight: 600;
+  color: var(--title-color, #34495e);
+  font-size: 1rem;
+}
+
+.tarjeta-manual form input[type="text"] {
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1.8px solid var(--input-border, #d1d9e6);
+  border-radius: 8px;
+  background: var(--form-bg, #fafafa);
+  color: var(--text-color, #2c3e50);
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tarjeta-manual form input[type="text"]:focus {
+  border-color: var(--input-focus-border, #3498db);
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+.tarjeta-manual form .button-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.tarjeta-manual form .btn {
+  flex: 1;
+  padding: 14px 0;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  color: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  /* Sin hover */
+}
+
+.tarjeta-manual form .btn.guardar {
+  background-color: #4caf50; /* Verde guardado */
+}
+
+.tarjeta-manual form .btn.cancelar {
+  background-color: #d9534f; /* Rojo cancelar */
+}

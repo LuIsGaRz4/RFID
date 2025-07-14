@@ -1,0 +1,33 @@
+
+<h2 class="header-title">
+  <button (click)="abrirModalAgregar()" class="btn agregar">➕ Agregar Usuario</button>
+  <span>Usuarios</span>
+</h2>
+
+
+<table class="usuarios-table">
+  <thead>
+    <tr>
+      <th>ID Usuario</th>
+      <th>Nombre</th>
+      <th>Rol</th>
+      <th>ID Tarjeta</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{ usuario.idUsuario }}</td>
+      <td>{{ usuario.nombre }}</td>
+      <td>{{ usuario.rol }}</td>
+      <td>{{ usuario.idTarjeta }}</td>
+      <td>
+        <button (click)="actualizarUsuario(usuario)" class="btn editar">✏️ Editar</button>
+        <button (click)="eliminarUsuarioPorTarjeta(usuario.idTarjeta)" class="btn eliminar">🗑️ Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="modal-footer">
+  <button (click)="cerrarModal()" class="btn cerrar">Cerrar</button>
+</div>

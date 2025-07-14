@@ -1,30 +1,29 @@
-<!-- Botón login fijo en la esquina -->
-<div class="login-corner" style="display: flex; flex-direction: column; align-items: flex-end;">
-  
-  <!-- Contenedor con info y logout (solo al estar logueado) -->
-  <ng-container *ngIf="auth.getRol(); else loginBtn">
-    <div style="margin-bottom: 5px;">
-      👤 {{ auth.getNombre() }} ({{ auth.getRol() }})
+<!-- Encabezado fijo -->
+<header class="encabezado-fijo">
+  <div class="login-corner">
+    <ng-container *ngIf="auth.getRol(); else loginBtn">
+      <div class="user-info">
+        👤 {{ auth.getNombre() }} ({{ auth.getRol() }})
+      </div>
 
-    </div>
-  </ng-container>
+      <div class="acciones">
+        <button class="export-btn user" (click)="abrirModal()">👤 Usuarios</button>
+        <button class="export-btn add" (click)="abrirFormularioManual()">➕ Agregar Tarjetas</button>
+        <button class="export-btn delete" (click)="abrirFormularioeliminart()">✖️ Eliminar Tarjetas</button>
+        <button class="export-btn excel" (click)="exportarExcel()">📄 Exportar Excel</button>
+        <button class="export-btn pdf" (click)="exportarPDF()">🧾 Exportar PDF</button>
+        <button class="export-btn logout" (click)="logout()">🔒 Cerrar sesión</button>
+      </div>
+    </ng-container>
 
-  <!-- Contenedor separado solo para el botón Exportar -->
-  <ng-container *ngIf="auth.getRol()">
-          <button mat-button color="warn" (click)="logout()">Cerrar sesión</button>
-    <button class="export-btn excel" (click)="exportarExcel()" >
-      📄 Exportar Excel
-    </button>
-      <button class="export-btn pdf" (click)="exportarPDF()" >
-        🧾 Exportar PDF
-      </button>
-  </ng-container>
+    <ng-template #loginBtn>
+      <button mat-stroked-button color="primary" (click)="abrirLogin()">Login 🔐</button>
+    </ng-template>
+  </div>
+</header>
 
-  <!-- Si no está logueado, mostrar botón login -->
-  <ng-template #loginBtn>
-    <button mat-stroked-button color="primary" (click)="abrirLogin()">Login 🔐</button>
-  </ng-template>
-</div>
+<!-- Espacio para evitar que el header tape el contenido -->
+<div style="height: 80px;"></div>
 
 
 

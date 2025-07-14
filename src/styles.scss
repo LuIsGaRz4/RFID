@@ -40,8 +40,8 @@ form {
   max-width: 480px;
   margin: 0 auto 2.5rem;
   border-radius: 12px;
-  box-shadow: 0 8px 20px var(--form-shadow);
-  transition: box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px transparent !important;
+  transition: box-shadow 0.3s ease !important;
 }
 
 form:hover {
@@ -124,7 +124,7 @@ th {
   color: #fff;
   font-weight: 700;
   padding: 1rem 1.2rem;
-  text-align: left;
+  text-align: center;
   user-select: none;
 }
 
@@ -133,6 +133,7 @@ td {
   padding: 0.9rem 1.2rem;
   border-bottom: 1px solid var(--table-border);
   color: var(--title-color);
+  text-align: center;
 }
 
 /* Filas con cambio de color suave al pasar el mouse */
@@ -175,7 +176,7 @@ table button:last-child:hover {
   box-shadow: 0 6px 16px rgba(192, 57, 43, 0.5);
 }
 
-/* Login fijo en la esquina con mejor espaciado y sombra */
+/* Login fijo en la esquina con mejor espaciado y sombra 
 .login-corner {
   background: transparent !important;
   position: fixed;
@@ -212,15 +213,23 @@ table button:last-child:hover {
   box-shadow: 0 6px 16px rgba(31, 95, 134, 0.5);
 }
 
-.login-corner button[color="warn"] {
-  background-color: var(--button-danger-bg);
+.login-corner button[color="warn"],
+.login-corner .export-btn.delete {
+  background-color: #d32f2f;
   color: white;
-  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.login-corner button[color="warn"]:hover {
-  background-color: var(--button-danger-hover);
-  box-shadow: 0 6px 16px rgba(184, 54, 40, 0.5);
+.login-corner button[color="warn"]:hover,
+.login-corner .export-btn.delete:hover {
+  background-color: #b71c1c;
+  box-shadow: 0 4px 8px rgba(183, 28, 28, 0.5);
 }
 
 /* Botón toggle modo fijo */

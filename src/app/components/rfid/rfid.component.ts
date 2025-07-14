@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RfidService } from 'src/app/services/rfid.service';
-import { RFIDRegistro } from 'src/app/MODELS/rfid-registro.models';
+import { RFIDRegistro, RFIDUsuario } from 'src/app/MODELS/rfid-registro.models';
 import { NotificationService } from 'src/app/services/notification.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from 'src/app/components/edit-dialog/edit-dialog.component';
@@ -10,6 +10,9 @@ import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { RfidManualComponent } from '../rfid-manual/rfid-manual.component';
+import { RfidEliminarTarjetaComponent } from '../rfid-eliminar-tarjeta/rfid-eliminar-tarjeta.component';
+import { UsuariosListaComponent } from '../rfid-usuarios/usuario-lista/usuario-lista.component';
 
 
 
@@ -95,6 +98,18 @@ logout() {
       this.registros = data;
     });
   }
+  abrirFormularioManual() {
+  this.dialog.open(RfidManualComponent, {
+    width: '400px',
+    disableClose: true,
+  });
+}
+abrirFormularioeliminart() {
+  this.dialog.open(RfidEliminarTarjetaComponent, {
+    width: '520px',
+    disableClose: false,
+  });
+}
 
   onRFIDScanned() {
     if (this.nuevoRegistro.idRegistro && this.nuevoRegistro.idRegistro.length >= 8) {
@@ -204,5 +219,14 @@ editarRegistro(registro: RFIDRegistro) {
 
   isSupervisor(): boolean {
     return this.auth.isSupervisor();
+  }
+
+  abrirModal() {
+    this.dialog.open(UsuariosListaComponent, {
+      width: '600px',
+      maxHeight: '80vh',
+      disableClose: false,
+      panelClass: 'custom-dialog-container' // opcional, para estilos
+    });
   }
 }

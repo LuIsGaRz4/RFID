@@ -1,0 +1,91 @@
+.overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90vw;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 24px 28px;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overlay h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.tarjetas-table {
+  width: 100%;
+  max-width: 450px;
+  border-collapse: collapse;
+  margin: 0 auto 20px;
+  font-size: 0.95rem;
+}
+
+.tarjetas-table th,
+.tarjetas-table td {
+  border: 1px solid #ddd;
+  padding: 5px 12px;
+  text-align: center;
+}
+
+.tarjetas-table th {
+  background-color: #f7f9fc;
+  color: #34495e;
+  font-weight: 600;
+  user-select: none;
+}
+
+.tarjetas-table tbody tr:hover {
+  background-color: #f0f8ff;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+button {
+  align-self: center;
+  padding: 10px 28px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+button:hover {
+  background-color: #2980b9;
+}

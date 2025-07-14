@@ -1,0 +1,63 @@
+<h2>{{ usuario.idUsuario && usuario.idUsuario !== 0 ? 'Editar Usuario' : 'Agregar Usuario' }}</h2>
+
+<form (ngSubmit)="guardarCambios()" #usuarioForm="ngForm" novalidate>
+  <div class="form-group">
+    <label for="nombre">Nombre</label>
+    <input
+      type="text"
+      id="nombre"
+      name="nombre"
+      [(ngModel)]="usuario.nombre"
+      required
+      #nombre="ngModel"
+      [class.invalid]="nombre.invalid && nombre.touched"
+    />
+    <div *ngIf="nombre.invalid && nombre.touched" class="error-msg">
+      El nombre es obligatorio.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="rol">Rol</label>
+    <select
+      id="rol"
+      name="rol"
+      [(ngModel)]="usuario.rol"
+      required
+      #rol="ngModel"
+      [class.invalid]="rol.invalid && rol.touched"
+    >
+      <option value="" disabled>Seleccione un rol</option>
+      <option value="Supervisor">Supervisor</option>
+      <option value="Empleado">Empleado</option>
+      <option value="Visita">Visita</option>
+      <option value="Externo">Externo</option>
+    </select>
+    <div *ngIf="rol.invalid && rol.touched" class="error-msg">
+      El rol es obligatorio.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="idTarjeta">ID Tarjeta</label>
+    <input
+      type="text"
+      id="idTarjeta"
+      name="idTarjeta"
+      [(ngModel)]="usuario.idTarjeta"
+      required
+      #idTarjeta="ngModel"
+      [class.invalid]="idTarjeta.invalid && idTarjeta.touched"
+    />
+    <div *ngIf="idTarjeta.invalid && idTarjeta.touched" class="error-msg">
+      El ID de tarjeta es obligatorio.
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn cancel" (click)="cancelar()">Cancelar</button>
+    <button type="submit" class="btn save" [disabled]="usuarioForm.invalid">
+      {{ usuario.idUsuario && usuario.idUsuario !== 0 ? 'Guardar' : 'Agregar' }}
+    </button>
+  </div>
+</form>
