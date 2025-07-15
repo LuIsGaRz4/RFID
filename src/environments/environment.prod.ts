@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://mi-servidor.com/api/RFIDRegistro'
+  apiUrl: 'https://api-rfid-dxc7ajbaf3encafu.canadacentral-01.azurewebsites.net/api'
 };
