@@ -13,6 +13,7 @@ import autoTable from 'jspdf-autotable';
 import { RfidManualComponent } from '../rfid-manual/rfid-manual.component';
 import { RfidEliminarTarjetaComponent } from '../rfid-eliminar-tarjeta/rfid-eliminar-tarjeta.component';
 import { UsuariosListaComponent } from '../rfid-usuarios/usuario-lista/usuario-lista.component';
+import { SignalRService } from 'src/app/services/signalr.service';
 
 
 
@@ -32,16 +33,25 @@ export class RfidComponent implements OnInit {
 
   editando: boolean = false;
 
-  constructor(
-    private rfidService: RfidService,
-    private notify: NotificationService,
-    private dialog: MatDialog,
-    public auth: AuthService
-  ) {}
+constructor(
+  private rfidService: RfidService,
+  private notify: NotificationService,
+  private dialog: MatDialog,
+  public auth: AuthService,
+  private signalR: SignalRService // ⬅️ nuevo
+) {}
 
-  ngOnInit(): void {
+
+ngOnInit(): void {
+  this.cargarRegistros();
+
+  this.signalR.conectar();
+  this.signalR.onActualizar(() => {
     this.cargarRegistros();
-  }
+    this.notify.showSuccess('🔄 Registros actualizados automáticamente');
+  });
+}
+
 
 exportarExcel() {
   const data = this.registros.map(reg => ({
