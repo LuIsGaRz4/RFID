@@ -51,28 +51,29 @@
 </form>
 
 <h3>Registros RFID</h3>
-<table border="1" cellspacing="0" cellpadding="5" style="width: 100%; margin-top: 20px;">
-  <thead>
-    <tr>
-      <th>Id Registro</th>
-      <th>Acceso</th>
-      <th>Nombre</th>
-      <th>Fecha</th>
-      <th *ngIf="isSupervisor()">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let reg of registros">
-      <td>{{ reg.idRegistro }}</td>
-      <td>{{ reg.idAccesos ? 'Sí' : 'No' }}</td>
-      <td>{{ reg.nombre }}</td>
-      <td>{{ reg.fecha | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
-<!-- Solo mostrar si es supervisor -->
-<td *ngIf="isSupervisor()">
-  <button (click)="editarRegistro(reg)">Editar</button>
-  <button (click)="eliminarRegistro(reg.idRegistro)">Eliminar</button>
-</td>
 
-    </tr>
-  </tbody>
-</table>
+<div class="tabla-responsive">
+  <table class="tabla-rfid">
+    <thead>
+      <tr>
+        <th>Id Registro</th>
+        <th>Acceso</th>
+        <th>Nombre</th>
+        <th>Fecha</th>
+        <th *ngIf="isSupervisor()">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reg of registros">
+        <td>{{ reg.idRegistro }}</td>
+        <td>{{ reg.idAccesos ? 'Sí' : 'No' }}</td>
+        <td>{{ reg.nombre }}</td>
+        <td>{{ reg.fecha | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+        <td *ngIf="isSupervisor()">
+          <button (click)="editarRegistro(reg)">Editar</button>
+          <button (click)="eliminarRegistro(reg.idRegistro)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

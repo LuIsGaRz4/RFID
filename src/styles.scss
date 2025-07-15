@@ -278,3 +278,43 @@ table button:last-child:hover {
 }
 
 
+.tabla-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tabla-rfid {
+  width: 100%;
+  min-width: 500px; /* Puedes ajustar este valor si hay muchas columnas */
+  border-collapse: collapse;
+  background: var(--form-bg);
+  box-shadow: 0 8px 20px var(--form-shadow);
+  border-radius: 12px;
+}
+
+.tabla-rfid th,
+.tabla-rfid td {
+  padding: 0.8rem 1rem;
+  text-align: center;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--table-border);
+}
+@media (max-width: 600px) {
+  .tabla-rfid {
+    font-size: 0.85rem;
+  }
+
+  .tabla-responsive {
+    overflow-x: auto;
+  }
+
+  .tabla-rfid th,
+  .tabla-rfid td {
+    padding: 0.6rem 0.8rem;
+  }
+
+  table button {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+}

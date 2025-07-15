@@ -119,7 +119,17 @@
   user-select: none;
 }
 
-
+.encabezado-fijo {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background: #fff;
+  padding: 1rem 1.5rem;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+}
 /* Cuando no es supervisor, alinea todo al centro */
 .login-corner.align-center {
   align-items: center;
@@ -134,4 +144,25 @@
 .encabezado-fijo.no-supervisor {
   justify-content: center; /* Centra todo el header */
   padding: 1rem 1rem; /* menos padding si quieres */
+}
+.tabla-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tabla-rfid {
+  width: 100%;
+  min-width: 500px; /* Puedes ajustar este valor si hay muchas columnas */
+  border-collapse: collapse;
+  background: var(--form-bg);
+  box-shadow: 0 8px 20px var(--form-shadow);
+  border-radius: 12px;
+}
+
+.tabla-rfid th,
+.tabla-rfid td {
+  padding: 0.8rem 1rem;
+  text-align: center;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--table-border);
 }
