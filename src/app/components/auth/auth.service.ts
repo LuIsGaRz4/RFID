@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private baseUrl = 'https://localhost:7188/api/RFIDRegistro'; // ruta API
+  private baseUrl = 'https://api-rfid-dxc7ajbaf3encafu.canadacentral-01.azurewebsites.net/api/RFIDRegistro'; // ruta API
 
   constructor(private http: HttpClient) {}
 
