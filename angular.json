@@ -21,7 +21,7 @@
           
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/RFID/",
+            "baseHref": "/",
             "outputPath": "dist/RFID-WEB",
             "index": "src/index.html",
             "main": "src/main.ts",
