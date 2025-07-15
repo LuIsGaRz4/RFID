@@ -11,7 +11,7 @@ export class LoginDialogComponent {
   idTarjeta: string = '';
   error: string = '';
 
-  readonly TARJETA_LENGTH = 8; // Ajusta según longitud real de tus tarjetas
+  readonly TARJETA_LENGTH = 10; // Ajusta según longitud real de tus tarjetas
 
   constructor(
     private auth: AuthService,
