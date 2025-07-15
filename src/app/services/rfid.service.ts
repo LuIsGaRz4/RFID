@@ -9,7 +9,7 @@ import { RFIDUsuario } from '../MODELS/rfid-registro.models';
   providedIn: 'root',
 })
 export class RfidService {
-  private baseUrl = 'https://api-rfid-dxc7ajbaf3encafu.canadacentral-01.azurewebsites.net/api/RFIDRegistro';
+  private baseUrl = 'https://https://api-rfid-dxc7ajbaf3encafu.canadacentral-01.azurewebsites.net/api/RFIDRegistro';
 
   constructor(private http: HttpClient) {}
 
