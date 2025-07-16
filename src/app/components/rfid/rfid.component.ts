@@ -159,7 +159,7 @@ enviarRegistro() {
   }
 
   if (this.editando) {
-    this.rfidService.putRegistro(registroFormateado, idTarjeta).subscribe(() => {
+    this.rfidService.putRegistro(registroFormateado).subscribe(() => {
       this.notify.showSuccess('Registro actualizado');
       this.limpiarFormulario();
       this.cargarRegistros();
@@ -174,21 +174,27 @@ enviarRegistro() {
 }
 
 
-async eliminarRegistro(idRegistro: string) {
-  const confirmado = await this.notify.confirm('¿Seguro que quieres eliminar este registro?');
-  if (confirmado) {
-    const idTarjeta = this.auth.getIdTarjeta();
-    if (!idTarjeta) {
-      this.notify.showError('⚠️ No se detectó la tarjeta del usuario.');
-      return;
-    }
+async eliminarRegistro(id?: number) {
+  if (id === undefined) {
+    this.notify.showError('ID del registro no válido.');
+    return;
+  }
 
-    this.rfidService.deleteRegistro(idRegistro, idTarjeta).subscribe(() => {
+  const confirmado = await this.notify.confirm('¿Seguro que quieres eliminar este registro?');
+  if (!confirmado) return;
+
+  this.rfidService.deleteRegistro(id).subscribe({
+    next: () => {
       this.notify.showSuccess('Registro eliminado');
       this.cargarRegistros();
-    });
-  }
+    },
+    error: (err) => {
+      console.error('Error al eliminar registro:', err);
+      this.notify.showError('Error al eliminar el registro.');
+    }
+  });
 }
+
 
 
 editarRegistro(registro: RFIDRegistro) {
@@ -200,19 +206,20 @@ editarRegistro(registro: RFIDRegistro) {
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
-      const idTarjeta = this.auth.getIdTarjeta();
-      if (!idTarjeta) {
-        this.notify.showError('⚠️ No se detectó la tarjeta del usuario.');
+      if (typeof result.id !== 'number') {
+        this.notify.showError('❌ No se pudo determinar el ID del registro a actualizar.');
         return;
       }
 
-      this.rfidService.putRegistro(result, idTarjeta).subscribe(() => {
-        this.notify.showSuccess('Registro actualizado');
+      this.rfidService.putRegistro(result).subscribe(() => {
+        this.notify.showSuccess('✅ Registro actualizado');
         this.cargarRegistros();
       });
     }
   });
 }
+
+
 
 
   limpiarFormulario() {

@@ -24,15 +24,16 @@ export class RfidService {
   }
 
   // Actualizar registro (PUT), con header idTarjeta
-  putRegistro(data: RFIDRegistro, idTarjeta: string) {
-    const headers = new HttpHeaders({ idTarjeta });
-    return this.http.put(`${this.baseUrl}/Actualizarregistro`, data, { headers });
-  }
+putRegistro(data: RFIDRegistro): Observable<any> {
+  return this.http.put(`${this.baseUrl}/ActualizarRegistro/${data.id}`, data);
+}
+
+
 
   // Eliminar registro (DELETE), con header idTarjeta
-  deleteRegistro(id: string, idTarjeta: string) {
-    const headers = new HttpHeaders({ idTarjeta });
-    return this.http.delete(`${this.baseUrl}/BorrarRegistro/${id}`, { headers });
+  deleteRegistro(id: number): Observable<any> {
+    const url = `${this.baseUrl}/BorrarRegistro/${id}`;
+    return this.http.delete(url);
   }
 
   // Obtener rol por tarjeta (GET)
