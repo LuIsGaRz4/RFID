@@ -166,3 +166,14 @@
   white-space: nowrap;
   border-bottom: 1px solid var(--table-border);
 }
+input.input-success {
+  border: 2px solid #00e676; /* Verde brillante */
+  box-shadow: 0 0 10px #00e676;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+input.input-error {
+  border: 2px solid #ff1744; /* Rojo brillante */
+  box-shadow: 0 0 10px #ff1744;
+  transition: border 0.3s, box-shadow 0.3s;
+}

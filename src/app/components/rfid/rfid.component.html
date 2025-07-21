@@ -39,15 +39,19 @@
 
 <form (ngSubmit)="enviarRegistro()" #rfidForm="ngForm" style="margin-bottom: 20px;">
   <label>Escanea tu tarjeta para registrar acceso:</label><br />
-  <input
-    type="text"
-    [(ngModel)]="nuevoRegistro.idRegistro"
-    name="idRegistro"
-    (input)="onRFIDScanned()"
-    autofocus
-    required
-    placeholder="ID tarjeta RFID"
-  /><br />
+<input
+  type="text"
+  [(ngModel)]="nuevoRegistro.idRegistro"
+  name="idRegistro"
+  (input)="onRFIDScanned()"
+  [ngClass]="{
+    'input-success': estadoInput === 'success',
+    'input-error': estadoInput === 'error'
+  }"
+  autofocus
+  required
+  placeholder="ID tarjeta RFID"
+/><br />
 </form>
 
 <h3>Registros RFID</h3>

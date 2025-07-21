@@ -32,6 +32,8 @@ export class RfidComponent implements OnInit {
   };
 
   editando: boolean = false;
+  estadoInput: 'success' | 'error' | '' = '';
+
 
 constructor(
   private rfidService: RfidService,
@@ -135,16 +137,23 @@ abrirFormularioeliminart() {
       this.rfidService.postRegistro(body).subscribe({
         next: (response) => {
           this.notify.showSuccess(`¡Bienvenido ${response.nombre}!`);
+          this.estadoInput = 'success'; // ✅ input en verde
           this.limpiarFormulario();
           this.cargarRegistros();
+
+          setTimeout(() => this.estadoInput = '', 2000); // limpia después de 2 segundos
         },
         error: (err) => {
           console.error('Error al guardar:', err);
           this.notify.showError('⚠️ Error al guardar. Verifica que el RFID esté registrado.');
+          this.estadoInput = 'error'; // ❌ input en rojo
+
+          setTimeout(() => this.estadoInput = '', 2000);
         }
       });
     }
   }
+
 
 enviarRegistro() {
   const registroFormateado: RFIDRegistro = {
