@@ -125,54 +125,31 @@ abrirFormularioeliminart() {
   });
 }
 
-onRFIDScanned() {
-  if (this.nuevoRegistro.idRegistro && this.nuevoRegistro.idRegistro.length >= 8) {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
+  onRFIDScanned() {
+    if (this.nuevoRegistro.idRegistro && this.nuevoRegistro.idRegistro.length >= 8) {
+      const body: RFIDRegistro = {
+        idRegistro: this.nuevoRegistro.idRegistro,
+        idAccesos: this.nuevoRegistro.idAccesos,
+      };
 
-    this.nuevoRegistro.fecha = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-
-    const body: RFIDRegistro = {
-      idRegistro: this.nuevoRegistro.idRegistro,
-      idAccesos: this.nuevoRegistro.idAccesos,
-      fecha: this.nuevoRegistro.fecha,
-    };
-
-    this.rfidService.postRegistro(body).subscribe({
-      next: (response) => {
-        this.notify.showSuccess(`¡Bienvenido ${response.nombre}!`);
-        this.limpiarFormulario();
-        this.cargarRegistros();
-      },
-      error: (err) => {
-        console.error('Error al guardar:', err);
-        this.notify.showError('⚠️ Error al guardar. Verifica que el RFID esté registrado.');
-      }
-    });
+      this.rfidService.postRegistro(body).subscribe({
+        next: (response) => {
+          this.notify.showSuccess(`¡Bienvenido ${response.nombre}!`);
+          this.limpiarFormulario();
+          this.cargarRegistros();
+        },
+        error: (err) => {
+          console.error('Error al guardar:', err);
+          this.notify.showError('⚠️ Error al guardar. Verifica que el RFID esté registrado.');
+        }
+      });
+    }
   }
-}
-
-
 
 enviarRegistro() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
-
-  const fechaLocal = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-
   const registroFormateado: RFIDRegistro = {
     ...this.nuevoRegistro,
-    fecha: fechaLocal,
+    fecha: this.formatDate(this.nuevoRegistro.fecha || ''),
   };
 
   const idTarjeta = this.auth.getIdTarjeta();
@@ -195,9 +172,6 @@ enviarRegistro() {
     });
   }
 }
-
-
-
 
 
 async eliminarRegistro(id?: number) {
