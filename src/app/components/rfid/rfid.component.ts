@@ -125,31 +125,35 @@ abrirFormularioeliminart() {
   });
 }
 
-  onRFIDScanned() {
-    if (this.nuevoRegistro.idRegistro && this.nuevoRegistro.idRegistro.length >= 8) {
-      const body: RFIDRegistro = {
-        idRegistro: this.nuevoRegistro.idRegistro,
-        idAccesos: this.nuevoRegistro.idAccesos,
-      };
+onRFIDScanned() {
+  if (this.nuevoRegistro.idRegistro && this.nuevoRegistro.idRegistro.length >= 8) {
+    this.nuevoRegistro.fecha = new Date().toISOString(); // ⬅️ añade esta línea
 
-      this.rfidService.postRegistro(body).subscribe({
-        next: (response) => {
-          this.notify.showSuccess(`¡Bienvenido ${response.nombre}!`);
-          this.limpiarFormulario();
-          this.cargarRegistros();
-        },
-        error: (err) => {
-          console.error('Error al guardar:', err);
-          this.notify.showError('⚠️ Error al guardar. Verifica que el RFID esté registrado.');
-        }
-      });
-    }
+    const body: RFIDRegistro = {
+      idRegistro: this.nuevoRegistro.idRegistro,
+      idAccesos: this.nuevoRegistro.idAccesos,
+      fecha: this.nuevoRegistro.fecha,
+    };
+
+    this.rfidService.postRegistro(body).subscribe({
+      next: (response) => {
+        this.notify.showSuccess(`¡Bienvenido ${response.nombre}!`);
+        this.limpiarFormulario();
+        this.cargarRegistros();
+      },
+      error: (err) => {
+        console.error('Error al guardar:', err);
+        this.notify.showError('⚠️ Error al guardar. Verifica que el RFID esté registrado.');
+      }
+    });
   }
+}
+
 
 enviarRegistro() {
   const registroFormateado: RFIDRegistro = {
     ...this.nuevoRegistro,
-    fecha: this.formatDate(this.nuevoRegistro.fecha || ''),
+    fecha: new Date().toISOString(), // ⬅️ hora actual
   };
 
   const idTarjeta = this.auth.getIdTarjeta();
@@ -172,6 +176,7 @@ enviarRegistro() {
     });
   }
 }
+
 
 
 async eliminarRegistro(id?: number) {
