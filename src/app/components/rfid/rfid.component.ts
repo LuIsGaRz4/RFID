@@ -128,9 +128,14 @@ abrirFormularioeliminart() {
 onRFIDScanned() {
   if (this.nuevoRegistro.idRegistro && this.nuevoRegistro.idRegistro.length >= 8) {
     const now = new Date();
-    const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-    this.nuevoRegistro.fecha = localDate.toISOString();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
 
+    this.nuevoRegistro.fecha = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
 
     const body: RFIDRegistro = {
       idRegistro: this.nuevoRegistro.idRegistro,
@@ -153,13 +158,21 @@ onRFIDScanned() {
 }
 
 
+
 enviarRegistro() {
   const now = new Date();
-  const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  const fechaLocal = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
 
   const registroFormateado: RFIDRegistro = {
     ...this.nuevoRegistro,
-    fecha: localDate.toISOString(), // ⬅️ corregido
+    fecha: fechaLocal,
   };
 
   const idTarjeta = this.auth.getIdTarjeta();
@@ -182,6 +195,7 @@ enviarRegistro() {
     });
   }
 }
+
 
 
 
