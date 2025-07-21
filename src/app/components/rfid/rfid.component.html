@@ -70,7 +70,8 @@
         <td>{{ reg.idRegistro }}</td>
         <td>{{ reg.idAccesos ? 'Sí' : 'No' }}</td>
         <td>{{ reg.nombre }}</td>
-        <td>{{ reg.fecha | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+        <td>{{ reg.fecha | date: 'MMM d, y – h:mm a' }}</td>
+
         <td *ngIf="isSupervisor()">
           <button (click)="editarRegistro(reg)">Editar</button>
           <button (click)="eliminarRegistro(reg.id)">Eliminar</button>
