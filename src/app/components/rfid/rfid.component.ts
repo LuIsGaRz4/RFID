@@ -127,7 +127,10 @@ abrirFormularioeliminart() {
 
 onRFIDScanned() {
   if (this.nuevoRegistro.idRegistro && this.nuevoRegistro.idRegistro.length >= 8) {
-    this.nuevoRegistro.fecha = new Date().toISOString(); // ⬅️ añade esta línea
+    const now = new Date();
+    const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+    this.nuevoRegistro.fecha = localDate.toISOString();
+
 
     const body: RFIDRegistro = {
       idRegistro: this.nuevoRegistro.idRegistro,
@@ -151,9 +154,12 @@ onRFIDScanned() {
 
 
 enviarRegistro() {
+  const now = new Date();
+  const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+
   const registroFormateado: RFIDRegistro = {
     ...this.nuevoRegistro,
-    fecha: new Date().toISOString(), // ⬅️ hora actual
+    fecha: localDate.toISOString(), // ⬅️ corregido
   };
 
   const idTarjeta = this.auth.getIdTarjeta();
@@ -176,6 +182,7 @@ enviarRegistro() {
     });
   }
 }
+
 
 
 
